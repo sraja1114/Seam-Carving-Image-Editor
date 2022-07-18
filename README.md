@@ -1,7 +1,7 @@
 # Seam-Carving-Image-Editor
 
 This project edits an image using the seam carving algorithm.
-The images are inputted and outputted in the .ppm file format to alter the pictures.
+The images are inputted and outputted in the .ppm file format to easily alter the pictures.
 The energy between pixels is calculated and any unneeded seams are removed.
 
 The image below is before the algorithm:

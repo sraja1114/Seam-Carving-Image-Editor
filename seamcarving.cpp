@@ -121,7 +121,11 @@ int main(int argc, char *argv[])
     cout << "End carving ..." << endl;
 
     ostringstream ss;
-    ss << "carved" << width << "X" << height << "." << filename;
+    for (size_t i = 0; i < 4; i++)
+    {
+      filename.pop_back();
+    }
+    ss << filename << "(" << width << "x" << height << ").ppm";
     outputImage(ss.str(), image, width, height);
   }
 

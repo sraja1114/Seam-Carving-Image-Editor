@@ -7,109 +7,108 @@
 
 using namespace std;
 
-int energy(const Pixel *const*image, int col, int row, int width, int height)
+int energy(const Pixel *const *image, int col, int row, int width, int height)
 {
-  
-  //integers created to represent
-  //change in pixels for each color
+
+  // integers created to represent
+  // change in pixels for each color
   int Rx;
   int Gx;
   int Bx;
   int Ry;
   int Gy;
   int By;
-  
- 
-  if (height == 1 || width == 1) //if height and width are 1
+
+  if (height == 1 || width == 1) // if height and width are 1
   {
-    return 0; //default energy change is 0
+    return 0; // default energy change is 0
   }
 
-  if (width == 0 || height == 0) //if 0 width and height, invalid
+  if (width == 0 || height == 0) // if 0 width and height, invalid
   {
     throw std::invalid_argument("height or width cannot be 0");
   }
 
-  //if the pixel is in the corner
+  // if the pixel is in the corner
   if ((col == 0 || col == width - 1) && (row == 0 || row == height - 1))
   {
-    Rx = image[abs(col-1)][row].r - image[width - (col + 1)][row].r;
-    Gx = image[abs(col-1)][row].g - image[width - (col + 1)][row].g;
-    Bx = image[abs(col-1)][row].b - image[width - (col + 1)][row].b;
-    Ry = image[col][abs(row-1)].r - image[col][height - (row + 1)].r;
-    Gy = image[col][abs(row-1)].g - image[col][height - (row + 1)].g;
-    By = image[col][abs(row-1)].b - image[col][height - (row + 1)].b;
+    Rx = image[abs(col - 1)][row].r - image[width - (col + 1)][row].r;
+    Gx = image[abs(col - 1)][row].g - image[width - (col + 1)][row].g;
+    Bx = image[abs(col - 1)][row].b - image[width - (col + 1)][row].b;
+    Ry = image[col][abs(row - 1)].r - image[col][height - (row + 1)].r;
+    Gy = image[col][abs(row - 1)].g - image[col][height - (row + 1)].g;
+    By = image[col][abs(row - 1)].b - image[col][height - (row + 1)].b;
   }
   // if border column pixel and not corner pixel
   else if ((col == 0 || col == width - 1) && (row != 0 || row != height - 1))
   {
-    Rx = image[abs(col-1)][row].r - image[width - (col + 1)][row].r;
-    Gx = image[abs(col-1)][row].g - image[width - (col + 1)][row].g;
-    Bx = image[abs(col-1)][row].b - image[width - (col + 1)][row].b;
-    Ry = image[col][row-1].r - image[col][row + 1].r;
-    Gy = image[col][row-1].g - image[col][row + 1].g;
-    By = image[col][row-1].b - image[col][row + 1].b;
+    Rx = image[abs(col - 1)][row].r - image[width - (col + 1)][row].r;
+    Gx = image[abs(col - 1)][row].g - image[width - (col + 1)][row].g;
+    Bx = image[abs(col - 1)][row].b - image[width - (col + 1)][row].b;
+    Ry = image[col][row - 1].r - image[col][row + 1].r;
+    Gy = image[col][row - 1].g - image[col][row + 1].g;
+    By = image[col][row - 1].b - image[col][row + 1].b;
   }
   // if border row pixel and not corner pixel
-  else if ((col != 0 || col != width -1) && (row == 0 || row == height -1 ))
+  else if ((col != 0 || col != width - 1) && (row == 0 || row == height - 1))
   {
-    Rx = image[col-1][row].r - image[col + 1][row].r;
-    Gx = image[col-1][row].g - image[col + 1][row].g;
-    Bx = image[col-1][row].b - image[col + 1][row].b;
-    Ry = image[col][abs(row-1)].r - image[col][height - (row + 1)].r;
-    Gy = image[col][abs(row-1)].g - image[col][height - (row + 1)].g;
-    By = image[col][abs(row-1)].b - image[col][height - (row + 1)].b;
+    Rx = image[col - 1][row].r - image[col + 1][row].r;
+    Gx = image[col - 1][row].g - image[col + 1][row].g;
+    Bx = image[col - 1][row].b - image[col + 1][row].b;
+    Ry = image[col][abs(row - 1)].r - image[col][height - (row + 1)].r;
+    Gy = image[col][abs(row - 1)].g - image[col][height - (row + 1)].g;
+    By = image[col][abs(row - 1)].b - image[col][height - (row + 1)].b;
   }
-  //if any non border pixel
+  // if any non border pixel
   else
   {
-    Rx = image[col-1][row].r - image[col + 1][row].r;
-    Gx = image[col-1][row].g - image[col + 1][row].g;
-    Bx = image[col-1][row].b - image[col + 1][row].b;
-    Ry = image[col][row-1].r - image[col][row + 1].r;
-    Gy = image[col][row-1].g - image[col][row + 1].g;
-    By = image[col][row-1].b - image[col][row + 1].b;
+    Rx = image[col - 1][row].r - image[col + 1][row].r;
+    Gx = image[col - 1][row].g - image[col + 1][row].g;
+    Bx = image[col - 1][row].b - image[col + 1][row].b;
+    Ry = image[col][row - 1].r - image[col][row + 1].r;
+    Gy = image[col][row - 1].g - image[col][row + 1].g;
+    By = image[col][row - 1].b - image[col][row + 1].b;
   }
 
-  //returns energy between pixels
-  return (Rx*Rx) + (Bx * Bx) + (Gx * Gx) + (Ry*Ry) + (Gy * Gy) + (By * By); 
+  // returns energy between pixels
+  return (Rx * Rx) + (Bx * Bx) + (Gx * Gx) + (Ry * Ry) + (Gy * Gy) + (By * By);
 }
 
-int getVerticalSeam(const Pixel *const*image, int start_col, int width, int height, int* seam)
+int getVerticalSeam(const Pixel *const *image, int start_col, int width, int height, int *seam)
 {
-  //ints that hold energy in each direction
+  // ints that hold energy in each direction
   int energyLeft = 0;
   int energyMiddle = 0;
   int energyRight = 0;
   int seamEnergy = 0;
 
-  //sets the starting pixel
+  // sets the starting pixel
   seam[0] = start_col;
 
-  //loops through image vertically
+  // loops through image vertically
   for (int i = 1; i < height; i++)
   {
-    //if edge pixel for left
-    if (start_col-1 < 0)
+    // if edge pixel for left
+    if (start_col - 1 < 0)
     {
       energyLeft = 10000000;
     }
     else
     {
-      energyLeft = energy(image, start_col-1, i, width, height);
+      energyLeft = energy(image, start_col - 1, i, width, height);
     }
-    //if edge pixel for right
-    if (start_col+1 > width-1)
+    // if edge pixel for right
+    if (start_col + 1 > width - 1)
     {
       energyRight = 10000000;
     }
     else
     {
-      energyRight = energy(image, start_col+1, i, width, height);
+      energyRight = energy(image, start_col + 1, i, width, height);
     }
     energyMiddle = energy(image, start_col, i, width, height);
-    
-    //changes start column based on calculated energies
+
+    // changes start column based on calculated energies
     if ((energyLeft < energyMiddle) && (energyLeft < energyRight))
     {
       start_col = start_col - 1;
@@ -134,57 +133,125 @@ int getVerticalSeam(const Pixel *const*image, int start_col, int width, int heig
     {
       start_col = start_col + 1;
     }
-    
-    //edits seam at that index
+
+    // edits seam at that index
     seam[i] = start_col;
   }
 
-  //counts energy of the seam
+  // counts energy of the seam
   for (int j = 0; j < height; j++)
   {
-    seamEnergy += energy(image,seam[j],j,width,height);
+    seamEnergy += energy(image, seam[j], j, width, height);
   }
 
-  //returns energy
+  // returns energy
   return seamEnergy;
 }
 
-
-void removeVerticalSeam(Pixel **image, int& width, int height, int *verticalSeam)
+void removeVerticalSeam(Pixel **image, int &width, int height, int *verticalSeam)
 {
-  //loops through height
+  // loops through height
   for (int i = 0; i < height; ++i)
   {
-    //shifts each pixel to the left
+    // shifts each pixel to the left
     for (int j = verticalSeam[i]; j < width - 1; ++j)
     {
-      image[j][i] = image[j+1][i];
+      image[j][i] = image[j + 1][i];
     }
   }
   width -= 1;
 }
 
-
-int getHorizontalSeam(const Pixel *const*image, int start_row, int width, int height, int* seam)
+int getHorizontalSeam(const Pixel *const *image, int start_row, int width, int height, int *seam)
 {
-  if (image == nullptr){ ; }
-  if (start_row == 0) { ; }
-  if (width == 0) { ; }
-  if (height == 0) { ; }
-  if (seam == nullptr) { ; }
-  return 0;
+  // ints that hold energy in each direction  
+  int energyUp = 0;
+  int energyMiddle = 0;
+  int energyDown = 0;
+  int seamEnergy = 0;
+
+  // sets the starting pixel
+  seam[0] = start_row;
+
+  // loops through image horizontally
+  for (int i = 1; i < width; i++)
+  {
+    // if edge pixel for up
+    if (start_row - 1 < 0)
+    {
+      energyUp = 10000000;
+    }
+    else
+    {
+      energyUp = energy(image, i, start_row - 1, width, height);
+    }
+    // if edge pixel for down
+    if (start_row + 1 > height - 1)
+    {
+      energyDown = 10000000;
+    }
+    else
+    {
+      energyDown = energy(image, i, start_row + 1, width, height);
+    }
+    energyMiddle = energy(image, i, start_row, width, height);
+
+    // changes start column based on calculated energies
+    if ((energyUp < energyMiddle) && (energyUp < energyDown))
+    {
+      start_row = start_row - 1;
+    }
+    else if ((energyMiddle < energyDown) && (energyMiddle < energyUp))
+    {
+      start_row = start_row;
+    }
+    else if ((energyDown < energyUp) && (energyDown < energyMiddle))
+    {
+      start_row = start_row + 1;
+    }
+    else if (energyMiddle == energyUp)
+    {
+      start_row = start_row;
+    }
+    else if (energyMiddle == energyDown)
+    {
+      start_row = start_row;
+    }
+    else if (energyUp == energyDown)
+    {
+      start_row = start_row + 1;
+    }
+
+    // edits seam at that index
+    seam[i] = start_row;
+  }
+
+  // counts energy of the seam
+  for (int j = 0; j < width; j++)
+  {
+    seamEnergy += energy(image, j, seam[j], width, height);
+  }
+
+  // returns energy
+  return seamEnergy;
 }
 
-
-void removeHorizontalSeam(Pixel **image, int width, int& height, int *horizontalSeam)
+void removeHorizontalSeam(Pixel **image, int width, int &height, int *horizontalSeam)
 {
-  if (image == nullptr) { ; }
-  if (width == 0) { ; }
-  if (height == 0) { ; }
-  if (horizontalSeam == nullptr) { ; }
+  // loops through height
+  int j = 0;
+  for (int i = horizontalSeam[j]; i < height - 1; ++i)
+  {
+    // shifts each pixel down
+    for (j = 0; j < width; ++j)
+    {
+      image[j][i] = image[j][i + 1];
+    }
+  }
+  height -= 1;
 }
 
-int *findMinVerticalSeam(const Pixel *const*image, int width, int height)
+int *findMinVerticalSeam(const Pixel *const *image, int width, int height)
 {
   // initialize minSeam and minDistance to seam starting at first col (index 0)
   int *minSeam = new int[height]{0};
@@ -202,19 +269,19 @@ int *findMinVerticalSeam(const Pixel *const*image, int width, int height)
     { // new min
       //  swap min & candidate
       minDist = candidateDistance;
-      int* temp = candidateSeam;
+      int *temp = candidateSeam;
       candidateSeam = minSeam;
       minSeam = temp;
     }
   }
 
-  // clean up 
-  delete [] candidateSeam;
+  // clean up
+  delete[] candidateSeam;
 
   return minSeam;
 }
 
-int *findMinHorizontalSeam(const Pixel *const*image, int width, int height)
+int *findMinHorizontalSeam(const Pixel *const *image, int width, int height)
 {
   // initialize minSeam and minDistance to seam starting at first row (index 0)
   int *minSeam = new int[width]{0};
@@ -232,14 +299,14 @@ int *findMinHorizontalSeam(const Pixel *const*image, int width, int height)
     { // new minimum
       //  swap min and candidate seams
       minDistance = candidateDistance;
-      int* temp = candidateSeam;
+      int *temp = candidateSeam;
       candidateSeam = minSeam;
       minSeam = temp;
     }
   }
 
-    // clean up 
-  delete [] candidateSeam;
+  // clean up
+  delete[] candidateSeam;
 
   return minSeam;
 }
@@ -309,7 +376,7 @@ bool isValidColor(int colorVal)
   return true;
 }
 
-Pixel ** loadImage(string filename, int &width, int &height)
+Pixel **loadImage(string filename, int &width, int &height)
 {
   cout << "Start loadImage..." << endl;
   // remove

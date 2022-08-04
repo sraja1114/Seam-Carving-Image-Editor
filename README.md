@@ -9,3 +9,9 @@ The image below is before the algorithm:
 
 The image below is after the program is run:
 ![sunsetafter](https://user-images.githubusercontent.com/90235503/171264513-acd78c41-72c4-4fc4-bd6f-2d2b8ffe3cf3.png)
+
+Another example before the algorithm:
+![citybefore](https://user-images.githubusercontent.com/90235503/182971543-e1037184-4b43-463d-b1d8-e8498010a0d7.jpg)
+
+The image below is after the program is run:
+![cityafter](https://user-images.githubusercontent.com/90235503/182971582-328b799a-e0d2-4b64-8b7f-314cac5be057.jpg)
